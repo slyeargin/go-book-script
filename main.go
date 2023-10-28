@@ -25,10 +25,12 @@ func main() {
 	logfile, _ := os.Create("app.log")
 
 	includeTbr := flag.Bool("include-tbr", false, "include to-read books in output")
+	importFile := flag.String("import-from", "imports/goodreads-export.csv", "path to import csv")
+	exportFile := flag.String("export-to", "goodreads.json", "path to export json")
 	flag.Parse()
 
 	// open file
-	f, err := os.Open("imports/goodreads-export.csv")
+	f, err := os.Open(*importFile)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -56,7 +58,7 @@ func main() {
 	}
 
 	// save json file
-	err = os.WriteFile("goodreads.json", jsonData, 0644)
+	err = os.WriteFile(*exportFile, jsonData, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
