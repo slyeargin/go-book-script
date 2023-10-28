@@ -6,9 +6,9 @@ A rewrite of [this Python notebook](https://github.com/yeargin/book-search) usin
 
 - [Install Go locally](https://go.dev/doc/install) if you haven't already.
 - Clone this repository.
-- Export your Goodreads library as a CSV.  Do nothing to clean up the data.  Save it to the `/imports` directory (I named mine `goodreads-export.csv`).
-- `go run main.go`.  This may take a minute.
-- Your output will be at `goodreads.json`.  It will only include books that have a `Date Read` value.  If the thought of declaring `To Read` amnesty bothers you, you can pass in the `-include-tbr` flag:  `go run main.go -include-tbr`
+- Export your Goodreads library as a CSV.  Do nothing to clean up the data.  The default location the script looks for is `/imports/goodreads-export.csv`, but you can pass in `-import-from=<Your file path here>`
+- Your output will be at `goodreads.json` by default.  (Specify elsewhere with `-export-to=<Your file path here>`.) It will only include books that have a `Date Read` value.  If the thought of declaring `To Read` amnesty bothers you, you can pass in the `-include-tbr` flag.
+- `go run main.go`, with or without any flags.  This may take a minute.
 
 ## Output 
 
