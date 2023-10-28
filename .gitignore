@@ -1,3 +1,4 @@
 goodreads.json
 imports/*
-!imports/.gitkeep 
+!imports/.gitkeep
+app.log
