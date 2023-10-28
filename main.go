@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/csv"
 	"encoding/json"
+	"flag"
 	"io"
 	"log"
 	"net/http"
@@ -23,6 +24,9 @@ type Book struct {
 func main() {
 	logfile, _ := os.Create("app.log")
 
+	includeTbr := flag.Bool("include-tbr", false, "include to-read books in output")
+	flag.Parse()
+
 	// open file
 	f, err := os.Open("imports/goodreads-export.csv")
 	if err != nil {
@@ -40,7 +44,7 @@ func main() {
 	}
 
 	// convert records to array of structs
-	importedList := createBookList(data)
+	importedList := createBookList(data, *includeTbr)
 
 	// fill in missing ISBNs
 	isbnList := getMissingISBNs(importedList)
@@ -65,13 +69,13 @@ type Config struct {
 	GoogleBooksAPIKey string
 }
 
-func createBookList(data [][]string) []Book {
+func createBookList(data [][]string, includeTbr bool) []Book {
 	// convert csv lines to array of structs
 	var bookList []Book
 	for i, line := range data {
 		if i > 0 { // omit header line
 			var book Book
-			if line[14] == "" {
+			if line[14] == "" && !includeTbr {
 				// only save read books
 				continue
 			} else {
