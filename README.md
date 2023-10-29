@@ -1,6 +1,6 @@
 # go-book-script
 
-A rewrite of [this Python notebook](https://github.com/yeargin/book-search) using Golang.
+A rewrite of [this Python notebook](https://github.com/yeargin/book-search) using Golang.  <b>go-book-script</b> parses an exported Goodreads library into a JSON file, filling in any missing ISBNs in the process.
 
 ## How to use
 
